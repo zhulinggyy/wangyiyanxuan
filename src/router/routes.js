@@ -6,19 +6,32 @@ import Classification from '../pages/Classification/Classification'
 import Goods from '../pages/Goods/Goods'
 import Profile from '../pages/Profile/Profile'
 import ShoppingCart from '../pages/ShoppingCart/ShoppingCart'
+import Phonelogin from '../../src/components/phonelogin/Phonelogin'
+import Emaillogin from '../../src/components/emaillogin/Emaillogin'
+
 
 export default [
+ // personage
   {
     path:'/msite',
-    component:MSite
+    component:MSite,
+    meta:{
+      isShow:true
+    }
   },
   {
     path:'/classification',
-    component:Classification
+    component:Classification,
+    meta:{
+      isShow:true
+    }
   },
   {
     path:'/goods',
-    component:Goods
+    component:Goods,
+    meta:{
+      isShow:true
+    }
   },
   {
     path:'/profile',
@@ -26,11 +39,22 @@ export default [
   },
   {
     path:'/shoppingCart',
-    component:ShoppingCart
+    component:ShoppingCart,
+    meta:{
+      isShow:true
+    }
+  },
+  {
+    path:'/emaillogin',
+    component:Emaillogin
+  },
+  {
+    path:'/phonelogin',
+    component:Phonelogin
   },
 
   {
     path:'/',
-    redirect:'/msite'
+    redirect:'/classification'
   }
 ]

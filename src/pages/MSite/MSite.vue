@@ -1,14 +1,7 @@
 <template>
   <div class="m-indexHD">
     <!--头部-->
-    <div class="line">
-      <img class="img_1" :src="'http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/indexLogo-a90bdaae6b.png'" alt="网易严选">
-      <div class="m-topSearchIpt ipt">
-        <img class="img_2" :src="'http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/search2-553dba3aff.png'" alt="放大镜">
-        <span class="placeholder">搜索商品, 共22102款好物</span>
-      </div>
-    </div>
-
+     <Header />
     <!--导航-->
     <div class="header_nav">
       <div class="left_ul_box">
@@ -62,10 +55,8 @@
 
 
     <!--banner图下面文字-->
-    <div class="bannerBotText">
-      <span><i class="iconfont icongouwuche"></i>网易自营品牌</span>
-      <span><i class="iconfont icongouwuche"></i>30天无忧退货</span>
-      <span><i class="iconfont icongouwuche"></i>48小时快速退款</span>
+    <div class="bannerBotText" v-if="MSiteData.policyDescList">
+      <span v-for="(item,index) in MSiteData.policyDescList" :key="index"><i class="item.icon"></i>{{item.desc}}</span>
     </div>
     <!--商品分类列表-->
     <div class="classLists">
@@ -73,92 +64,10 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <div class="classList_content">
-              <ul>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="classList_content">
-              <ul>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
-                </li>
-                <li>
-                  <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-                  <P>居家生活</P>
+              <ul v-if="MSiteData.kingKongModule">
+                <li v-for="(item, index) in MSiteData.kingKongModule.kingKongList" :key="index">
+                  <img :src="item.picUrl" alt="">
+                  <P>{{item.text}}</P>
                 </li>
               </ul>
             </div>
@@ -381,29 +290,11 @@
           </a>
         </div>
         <div class="indexfloor_list">
-          <ul>
-            <li>
-              <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
-              <div class="is-right_font">网易智造N520除螨</div>
-              <div class="desc">吸尘器 <i>￥449</i></div>
-              <div class="tagWraper new">
-                <span>爆品</span>
-                <span>限时购</span>
-              </div>
-            </li>
-            <li>
-              <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
-              <div class="is-right_font">网易智造N520除螨</div>
-              <div class="desc">吸尘器 <i>￥449</i></div>
-              <div class="tagWraper new">
-                <span>爆品</span>
-                <span>限时购</span>
-              </div>
-            </li>
-            <li>
-              <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
-              <div class="is-right_font">网易智造N520除螨</div>
-              <div class="desc">吸尘器 <i>￥449</i></div>
+          <ul class="popular_goods" v-if="MSiteData.popularItemList">
+            <li v-for="(item, index) in MSiteData.popularItemList" :key="index">
+              <div class="indexfloor_img"><img :src="item.primaryPicUrl" alt=""></div>
+              <div class="is-right_font">{{item.name}}</div>
+              <div class="desc">吸尘器 <i>￥{{item.retailPrice}}</i></div>
               <div class="tagWraper new">
                 <span>爆品</span>
                 <span>限时购</span>
@@ -425,37 +316,20 @@
         </a>
       </div>
       <div class="xianshigou_list">
-        <ul>
-          <li>
-            <div class="xianshigou_img"><img src="http://yanxuan.nosdn.127.net/13b5e44efa717730da99387de63bde3b.png?imageView&thumbnail=216x216&quality=75" alt=""></div>
-            <p>¥216</p>
-          </li>
-          <li>
-            <div class="xianshigou_img"><img src="http://yanxuan.nosdn.127.net/13b5e44efa717730da99387de63bde3b.png?imageView&thumbnail=216x216&quality=75" alt=""></div>
-            <p>¥216</p>
-          </li>
-          <li>
-            <div class="xianshigou_img"><img src="http://yanxuan.nosdn.127.net/13b5e44efa717730da99387de63bde3b.png?imageView&thumbnail=216x216&quality=75" alt=""></div>
-            <p>¥216</p>
-          </li>
-          <li>
-            <div class="xianshigou_img"><img src="http://yanxuan.nosdn.127.net/13b5e44efa717730da99387de63bde3b.png?imageView&thumbnail=216x216&quality=75" alt=""></div>
-            <p>¥216</p>
-          </li>
-          <li>
-            <div class="xianshigou_img"><img src="http://yanxuan.nosdn.127.net/13b5e44efa717730da99387de63bde3b.png?imageView&thumbnail=216x216&quality=75" alt=""></div>
-            <p>¥216</p>
-          </li>
-          <li>
-            <div class="xianshigou_img"><img src="http://yanxuan.nosdn.127.net/13b5e44efa717730da99387de63bde3b.png?imageView&thumbnail=216x216&quality=75" alt=""></div>
-            <p>¥216</p>
+        <ul v-if=" MSiteData.flashSaleModule">
+          <li v-for="(item, index) in MSiteData.flashSaleModule.itemList" :key="index">
+            <div class="xianshigou_img">
+              <img :src="item.picUrl" alt="">
+            </div>
+            <p>¥{{item.activityPrice}}</p>
+            <p>¥{{item.originPrice}}</p>
           </li>
         </ul>
       </div>
     </div>
 
     <!--新品首发-->
-    <div class="xianshigou newshoufa">
+    <div class="xianshigou newshoufa ">
       <div class="moduleTitle">
         <div class="left">
           <span>新品首发</span>
@@ -466,31 +340,12 @@
         </a>
       </div>
       <div class="xianshigou_list">
-        <ul>
-          <li>
-            <div class="xianshigou_img"><img src="http://yanxuan.nosdn.127.net/55d8d878ee00b7a59c1b45f740087c93.png?imageView&quality=65&thumbnail=330x330" alt=""></div>
-            <p>2019明前特级西湖龙井 ... <i>¥216</i></p>
-            <span>新茶品尝</span>
-          </li>
-          <li>
-            <div class="xianshigou_img"><img src="http://yanxuan.nosdn.127.net/55d8d878ee00b7a59c1b45f740087c93.png?imageView&quality=65&thumbnail=330x330" alt=""></div>
-            <p>2019明前特级西湖龙井 ... <i>¥216</i></p>
-          </li>
-          <li>
-            <div class="xianshigou_img"><img src="http://yanxuan.nosdn.127.net/55d8d878ee00b7a59c1b45f740087c93.png?imageView&quality=65&thumbnail=330x330" alt=""></div>
-            <p>2019明前特级西湖龙井 ... <i>¥216</i></p>
-          </li>
-          <li>
-            <div class="xianshigou_img"><img src="http://yanxuan.nosdn.127.net/55d8d878ee00b7a59c1b45f740087c93.png?imageView&quality=65&thumbnail=330x330" alt=""></div>
-            <p>2019明前特级西湖龙井 ... <i>¥216</i></p>
-          </li>
-          <li>
-            <div class="xianshigou_img"><img src="http://yanxuan.nosdn.127.net/55d8d878ee00b7a59c1b45f740087c93.png?imageView&quality=65&thumbnail=330x330" alt=""></div>
-            <p>2019明前特级西湖龙井 ... <i>¥216</i></p>
-          </li>
-          <li>
-            <div class="xianshigou_img"><img src="http://yanxuan.nosdn.127.net/55d8d878ee00b7a59c1b45f740087c93.png?imageView&quality=65&thumbnail=330x330" alt=""></div>
-            <p>2019明前特级西湖龙井 ... <i>¥216</i></p>
+        <ul v-if=" MSiteData.newItemList">
+          <li v-for="(item,index) in MSiteData.newItemList" :key="index" style="width: 22%">
+            <div class="xianshigou_img"><img
+              :src="item.listPicUrl" alt=""></div>
+            <p>{{item.simpleDesc}}<i>¥216</i></p>
+            <span>{{item.name}}</span>
           </li>
         </ul>
       </div>
@@ -539,7 +394,7 @@
     </div>
 
 
-
+      <!--超火断货王-->
     <div class="m-indexFloor gouwarp">
       <div class="indexfloor_list indexfloor_list_warp clearfix">
         <ul class="contentdd">
@@ -597,12 +452,208 @@
               <span>限时购</span>
             </div>
           </li>
-
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li class="icon_is-right">
+            <div class="is-right_font_gengduo">查看更多<i class="iconfont iconjiantou"></i></div>
+          </li>
         </ul>
+      </div>
+
+      <div class="guanggao">
+        <a class="bannder" href="javascript:void(0)" style="background-image:url(https://yanxuan.nosdn.127.net/65809aa8953965561715b1d721f3e710.jpg?imageView&thumbnail=750x0&quality=75);background-size:100% 100%;"></a>
+      </div>
+    </div>
+    <div class="m-indexFloor gouwarp">
+      <div class="indexfloor_list indexfloor_list_warp-2 clearfix">
+        <ul class="contentdd">
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li class="icon_is-right">
+            <div class="is-right_font_gengduo">查看更多<i class="iconfont iconjiantou"></i></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="guanggao">
+        <a class="bannder" href="javascript:void(0)" style="background-image:url(https://yanxuan.nosdn.127.net/f64270dfb7410b7b17a1e8232db144ff.png?imageView&thumbnail=750x0&quality=75);background-size:100% 100%;"></a>
+      </div>
+    </div>
+    <div class="m-indexFloor gouwarp">
+      <div class="indexfloor_list indexfloor_list_warp-3 clearfix">
+        <ul class="contentdd">
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li>
+            <div class="indexfloor_img"><img src="./imgs/1.png" alt=""></div>
+            <div class="is-right_font">网易智造N520除螨</div>
+            <div class="desc">吸尘器 <i>￥449</i></div>
+            <div class="tagWraper new">
+              <span>爆品</span>
+              <span>限时购</span>
+            </div>
+          </li>
+          <li class="icon_is-right">
+            <div class="is-right_font_gengduo">查看更多<i class="iconfont iconjiantou"></i></div>
+          </li>
+        </ul>
+      </div>
+      <div class="guanggao">
+        <a class="bannder" href="javascript:void(0)" style="background-image:url(https://yanxuan.nosdn.127.net/fc2388e61c4e083924689c889987cc10.jpg?imageView&thumbnail=750x0&quality=75);background-size:100% 100%;"></a>
       </div>
     </div>
 
-    <button @click="getMockHome">aaa</button>
+
+
+
+
 
 
 
@@ -610,40 +661,38 @@
 </template>
 
 <script>
+  import Header from '../../../src/components/Header/header'
+  import {mapState}from 'vuex'
   import BScroll from 'better-scroll';
   import Swiper from 'swiper'
   import {reqMockHome} from '../../api';
   import 'swiper/dist/css/swiper.css'
 
   export default {
+    components:{
+      Header,
+    },
     data(){
       return{
         isAllChannel: false
       }
     },
     mounted(){
-      const bScroll = new BScroll(".left_ul_box", {
+      const bScroll = new BScroll(".indexfloor_list_warp", {
         scrollX: true
       })
-
       const bScroll2 = new BScroll(".indexfloor_list_warp", {
         scrollX: true
       })
-
-
-
-
-
-
-
-
-      // let wrapper = document.querySelector('.gou')
-      // let scroll = new BScroll(wrapper)
-
-      // const bScroll = new BScroll(".indexfloor_list", {
-      //   scrollX: true
-      // })
-
+      const bScroll3 = new BScroll(".indexfloor_list_warp-2", {
+        scrollX: true
+      })
+      const bScroll4 = new BScroll(".indexfloor_list_warp-3", {
+        scrollX: true
+      })
+      const bScroll5 = new BScroll(".indexfloor_list_warp-4", {
+        scrollX: true
+      })
 
       const mySwiper = new Swiper ('.swiper-container', {
         direction: 'horizontal', // 垂直切换选项
@@ -653,24 +702,29 @@
         pagination: {
           el: '.swiper-pagination',
         },
-
       })
-
-
-
-
-
     },
+    updated(){
+      if(!this.bScroll){
+        this.bScroll = new BScroll(".left_ul_box", {
+          scrollX: true
+        })
+      }else {
+        this.bScroll.refresh()
+      }
+    },
+
     methods: {
       allChannelShow(){
         this.isAllChannel = !this.isAllChannel;
       },
-      async getMockHome(){
-        const result = await reqMockHome();
-        console.log(result)
-      }
     },
+    computed: {
+      ...mapState({
+        MSiteData:state=>state.MSiteData,
 
+      })
+    }
   }
 
 

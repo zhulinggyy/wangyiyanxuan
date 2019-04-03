@@ -1,15 +1,36 @@
 // 引入ajax模块
 import ajax from './ajax'
-
+//
 // const prefix = 'http://m.you.163.com'    // npm run build
-//使用代理
-const prefix = '/api'
+// // 使用代理
+// const prefix = '/api'
 
 // 首页数据
-export const reqMockHome = () => ajax('/homeData.json');    // 请求mock数据
+export const reqMockHome = () => ajax('/MSite');    // 请求mock数据
 
-// 搜索 关键字
-export const reqInitSearch = () => ajax(`${prefix}/xhr/search/init.json`, 'POST')
+export const reqCategory=()=>ajax('/Category');
+
+export const reqCategoryList = () => ajax('/CategoryList');
+
+
+// //发送短信验证码
+// export const reqSendCode=(phone)=>ajax(BASE+'/sendcode',{phone})
+//
+// //   [6、用户名密码登陆](#6用户名密码登陆)<br/>
+// export const reqPwdLogin=(user)=>ajax(BASE+'/login_pwd',user,'POST')
+//
+//
+// // [8、手机号验证码登陆](#8手机号验证码登陆)<br/>
+// export const reqSmsLogin=(phone,code)=>ajax(BASE+'login_sms',{phone,code},'POST')
+//
+// // [9、根据会话获取用户信息](#9根据会话获取用户信息)<br/>
+// export const reqUser=()=>ajax(BASE+'/userinfo')
+//
+// // [10、用户登出](#10用户登出)<br/>
+// export const reqLogout=()=>ajax(BASE+'/logout')
+//
+// //
+
 
 // 获取搜索结果
 export const reqSearchResult = (keywordPrefix) => ajax(`${prefix}/xhr/search/searchAutoComplete.json`, {keywordPrefix})
@@ -34,3 +55,4 @@ export const reqList = (page, size, type) => ajax(`${prefix}/topic/v1/look/getLi
 
 // 其它组件 数据 ---- http://m.you.163.com/topic/v1/find/getTabData.json
 export const reqTabData = (page, size, tabId) => ajax(`${prefix}/topic/v1/find/getTabData.json`, {page, size, tabId})
+
